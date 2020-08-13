@@ -7,32 +7,24 @@ let bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//routes
-//app.get('/', function (request, response) {
-//  response.send('hello world');
-//})
-
 app.get('/comments', function (request, response) {
   console.log('GET request received at /comments');
   db.all('SELECT * FROM comments', function (err, rows) {
     if (err) {
       console.log("Error: " + err);
-    }
-    else {
+    } else {
       response.send(rows);
     }
   });
 
 });
 
-
 app.post('/comments', function (request, response) {
   console.log('POST request received at /comments');
   db.run('INSERT INTO comments VALUES (?,?)', [request.body.name, request.body.comment], function (err) {
     if (err) {
       console.log("Error: " + err);
-    }
-    else {
+    } else {
       response.status(200).redirect('index.html');
     }
   });

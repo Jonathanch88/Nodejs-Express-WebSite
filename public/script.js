@@ -8,15 +8,15 @@ const getComments = () => {
 getComments();
 const showComments = (comments) => {
   let commentsSection = document.getElementById("suggestions");
-   for (let i = 0; i < comments.length; i++) {
+  comments.map((commen) => {
     let section = document.createElement("section");
     section.className += "suggestion";
     let heading = document.createElement("h3");
-    heading.innerHTML = comments[i].name;
+    heading.innerHTML = commen.name;
     let comment = document.createElement("p");
-    comment.innerHTML = comments[i].comment;
+    comment.innerHTML = commen.comment;
     section.appendChild(heading);
     section.appendChild(comment);
     commentsSection.appendChild(section);
-    }
+  })
 }
